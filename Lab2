@@ -1,0 +1,16 @@
+select count(*) as "total_invoices" from invoices;
+
+select sum(invoice_total) as "invoice_total_amount" from invoices;
+
+select avg(invoice_total) as "average_invoice_total" from invoices;
+
+select min(invoice_total) as "lowest_invoice_total", max(invoice_total) as "highest_invoice_total" from invoices;
+
+select sum(payment_total) as "total_amount_paid" from invoices group by vendor_id order by total_amount_paid DESC;
+
+select vendor_id, count(*) as "number of invoices", sum(invoice_total) as "total_invoice_amount" from invoices group by vendor_id order by total_invoice_amount DESC;
+
+select account_number, sum(line_item_amount) as "total_line_item_amount" from  
+invoice_line_items group by account_number order by total_line_item_amount DESC;
+
+select vendor_id, sum(invoice_total) from invoices group by vendor_id with rollup order by vendor_id ASC
